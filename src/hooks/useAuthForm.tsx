@@ -60,7 +60,11 @@ export const useAuthForm = (
       if (isLogin) {
         const { error } = await signIn(formData.email, formData.password);
         if (error) {
-          toastHelper.error("Error", error.message);
+          const message =
+            error.message.includes('NOT_FOUND')
+              ? 'Authentication service unavailable. Please check your configuration.'
+              : error.message;
+          toastHelper.error('Error', message);
         } else {
           toastHelper.success("Success!", "Welcome back!");
           // Fetch the authenticated user to determine their role
