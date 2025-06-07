@@ -2,6 +2,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToastHelper } from "@/utils/toastUtils";
+import { isValidShowingStatus } from "@/utils/showingStatus";
 
 interface Profile {
   first_name: string;
@@ -39,6 +40,13 @@ export const useAssignShowingRequest = () => {
 
       const agentEmail = currentUser.email;
       
+      const newStatus = 'agent_assigned';
+
+      if (!isValidShowingStatus(newStatus)) {
+        toastHelper.error('Assignment Failed', 'Invalid status value');
+        return false;
+      }
+
       const { error } = await supabase
         .from('showing_requests')
         .update({
@@ -46,7 +54,7 @@ export const useAssignShowingRequest = () => {
           assigned_agent_name: `${profile.first_name} ${profile.last_name}`,
           assigned_agent_phone: profile.phone,
           assigned_agent_email: agentEmail,
-          status: 'agent_assigned',
+          status: newStatus,
           status_updated_at: new Date().toISOString()
         })
         .eq('id', requestId);

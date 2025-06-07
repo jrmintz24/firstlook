@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useAssignShowingRequest } from "./useAssignShowingRequest";
+import { isValidShowingStatus } from "@/utils/showingStatus";
 
 interface Profile {
   id: string;
@@ -134,6 +135,15 @@ export const useAgentDashboard = () => {
     estimatedDate?: string
   ) => {
     console.log('Updating status:', { requestId, newStatus, estimatedDate });
+
+    if (!isValidShowingStatus(newStatus)) {
+      toast({
+        title: 'Error',
+        description: 'Invalid status',
+        variant: 'destructive',
+      });
+      return false;
+    }
     
     try {
       const updates: ShowingRequestUpdates = {
