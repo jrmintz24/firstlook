@@ -151,7 +151,7 @@ const ShowingRequestCard = ({
         </div>
 
         {/* Actions */}
-        {showActions && ['submitted', 'under_review', 'agent_assigned', 'confirmed', 'pending', 'scheduled'].includes(showing.status) && (
+        {showActions && ['submitted', 'under_review', 'agent_assigned', 'agent_confirmed', 'confirmed', 'pending', 'scheduled', 'in_progress'].includes(showing.status) && (
           <div className="flex gap-3 flex-wrap">
             {showing.status === 'confirmed' && onConfirm && (
               <Button variant="outline" size="sm" onClick={() => onConfirm(showing.id)} className="border-green-200 text-green-700 hover:bg-green-50">

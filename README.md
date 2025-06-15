@@ -118,8 +118,9 @@ supabase db execute < supabase/sql/20250610_messages_and_agreements.sql
 ```
 
 If agent assignment or acceptance fails with a `showing_requests_status_check`
-error, apply the status migration to allow the new `pending_admin_approval`
-value:
+error, apply the status migration to refresh the allowed status values. This
+ensures new statuses like `pending_admin_approval` and `agent_confirmed` are
+accepted by the database:
 ```sh
 supabase db execute < supabase/sql/20250615_update_status_check.sql
 ```
@@ -130,12 +131,16 @@ The allowed values for the `status` column are:
 pending
 submitted
 under_review
+agent_requested
 agent_assigned
 pending_admin_approval
 confirmed
+agent_confirmed
 scheduled
+in_progress
 completed
 cancelled
+no_show
 ```
 
 ## Can I connect a custom domain to my Lovable project?

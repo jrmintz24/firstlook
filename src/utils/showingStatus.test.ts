@@ -24,12 +24,14 @@ describe('showingStatus utilities', () => {
   it('getEstimatedTimeline falls back to pending timeline for unknown status', () => {
     const unknown = 'unknown' as ShowingStatus;
     const timeline = getEstimatedTimeline(unknown);
-    expect(timeline).toBe('We typically assign agents within 2-4 hours');
+    expect(timeline).toBe('');
   });
 
-  it('isActiveShowing identifies only confirmed or scheduled statuses', () => {
+  it('isActiveShowing identifies confirmed, agent_confirmed, scheduled or in_progress statuses', () => {
     expect(isActiveShowing('confirmed')).toBe(true);
+    expect(isActiveShowing('agent_confirmed')).toBe(true);
     expect(isActiveShowing('scheduled')).toBe(true);
+    expect(isActiveShowing('in_progress')).toBe(true);
     expect(isActiveShowing('submitted')).toBe(false);
   });
 

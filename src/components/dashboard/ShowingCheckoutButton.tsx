@@ -23,7 +23,7 @@ const ShowingCheckoutButton = ({ showing, userType }: ShowingCheckoutButtonProps
   const { user } = useAuth();
 
   // Only show for active showings
-  if (!['confirmed', 'scheduled'].includes(showing.status)) {
+  if (!['confirmed', 'agent_confirmed', 'scheduled', 'in_progress'].includes(showing.status)) {
     return null;
   }
 

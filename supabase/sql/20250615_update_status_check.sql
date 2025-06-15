@@ -8,11 +8,15 @@ ALTER TABLE showing_requests
       'pending',
       'submitted',
       'under_review',
+      'agent_requested',
       'agent_assigned',
       'pending_admin_approval',
       'confirmed',
+      'agent_confirmed',
       'scheduled',
+      'in_progress',
       'completed',
-      'cancelled'
+      'cancelled',
+      'no_show'
     )
   );

@@ -144,7 +144,7 @@ const AgentRequestCard = ({ request, onAssign, onUpdateStatus, onSendMessage, on
             </Button>
           )}
 
-          {!showAssignButton && ['submitted', 'under_review', 'agent_assigned', 'agent_confirmed', 'confirmed', 'scheduled'].includes(request.status) && (
+          {!showAssignButton && ['submitted', 'under_review', 'agent_assigned', 'agent_confirmed', 'confirmed', 'scheduled', 'in_progress'].includes(request.status) && (
             <Button
               variant="outline"
               onClick={() => onUpdateStatus(request.status)}
