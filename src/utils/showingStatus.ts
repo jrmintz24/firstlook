@@ -151,9 +151,10 @@ export const getStatusInfo = (status: ShowingStatus) => {
 };
 
 export const getEstimatedTimeline = (status: ShowingStatus): string => {
+  const pendingTimeline = 'Agents typically respond within 2-4 hours';
   switch (status) {
     case 'pending':
-      return 'Agents typically respond within 2-4 hours';
+      return pendingTimeline;
     case 'submitted':
     case 'under_review':
       return 'Review typically takes 1-2 hours';
@@ -173,7 +174,7 @@ export const getEstimatedTimeline = (status: ShowingStatus): string => {
     case 'no_show':
       return '';
     default:
-      return '';
+      return pendingTimeline;
   }
 };
 
